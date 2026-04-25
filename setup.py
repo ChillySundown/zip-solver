@@ -36,8 +36,6 @@ barrier_types = {
     0b1110,
     0b1111
 }
-print(len(barrier_types))
-
 
 """
 board: A 2-dimensional list of numbers symbolizing different spots
