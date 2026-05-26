@@ -44,10 +44,14 @@ board: A 2-dimensional list of numbers symbolizing different spots
     - float('inf') -> Spot is taken by current path
 
 barriers: A 2-dimensional list of integers symbolizing the type of 
-currentPath: A list of directions starting from the first node
+head: A list of directions starting from the first node
 """
-def out_of_bounds(head, board_len):
-    return any(not (0 <= pos <= board_len) for pos in head)     
+def out_of_bounds(coord, board_len):
+    return any(not (0 <= pos <= board_len) for pos in coord) 
+
+def filled_board(board):
+    return all(all((col < 0) for col in row) for row in board)
+
 
 """
 Converts metadata to 2 grids
