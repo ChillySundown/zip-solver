@@ -49,9 +49,18 @@ head: A list of directions starting from the first node
 def out_of_bounds(coord, board_len):
     return any(not (0 <= pos <= board_len) for pos in coord) 
 
-def filled_board(board):
-    return all(all((col < 0) for col in row) for row in board)
+def filled_board(node_arr):
+    return all(all((col < 0) for col in row) for row in node_arr)
 
+"""
+Placeholder for future solve check logic
+A solved game should satisfy:
+    - Board is filled
+    - No barries should be crossed
+
+"""
+def check_solved(board):
+    return
 
 """
 Converts metadata to 2 grids
@@ -64,3 +73,6 @@ Converts metadata to 2 grids
 """
 def to_grid():
     return
+
+def move_to(cur_loc, dir):
+    return (cur_loc[0] + dir[0], cur_loc[1] + dir[1])
