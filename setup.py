@@ -18,7 +18,7 @@ Ex:
 1111: no walls, all directions valid
 """
 
-barrier_types = {
+barrier_types = [
     0b0000,
     0b0001,
     0b0010,
@@ -35,7 +35,7 @@ barrier_types = {
     0b1101,
     0b1110,
     0b1111
-}
+]
 
 """
 board: A 2-dimensional list of numbers symbolizing different spots
@@ -48,3 +48,15 @@ currentPath: A list of directions starting from the first node
 """
 def out_of_bounds(head, board_len):
     return any(not (0 <= pos <= board_len) for pos in head)     
+
+"""
+Converts metadata to 2 grids
+    -Edges: 2D-Array of 4-bit values symbolizing barriers at each node
+    -Nums: 2D-Array of 8-bit values that symbolize a node's number and fill status:
+        - 0: Node has not been filled and has no number assigned
+        - -1: Node has been filled by path
+        - 1, 2, ..., N: Node has not been filled and has a number value
+
+"""
+def to_grid():
+    return
