@@ -18,24 +18,24 @@ Ex:
 1111: no walls, all directions valid
 """
 
-barrier_types = [
-    0b0000,
-    0b0001,
-    0b0010,
-    0b0011,
-    0b0100,
-    0b0101,
-    0b0110,
-    0b0111,
-    0b1000,
-    0b1001,
-    0b1010,
-    0b1011,
-    0b1100,
-    0b1101,
-    0b1110,
-    0b1111
-]
+# barrier_types = [
+#     0b0000,
+#     0b0001,
+#     0b0010,
+#     0b0011,
+#     0b0100,
+#     0b0101,
+#     0b0110,
+#     0b0111,
+#     0b1000,
+#     0b1001,
+#     0b1010,
+#     0b1011,
+#     0b1100,
+#     0b1101,
+#     0b1110,
+#     0b1111
+# ]
 
 """
 board: A 2-dimensional list of numbers symbolizing different spots
@@ -47,7 +47,7 @@ barriers: A 2-dimensional list of integers symbolizing the type of
 head: A list of directions starting from the first node
 """
 def out_of_bounds(coord, board_len):
-    return any(not (0 <= pos <= board_len) for pos in coord) 
+    return any(not (0 <= pos < board_len) for pos in coord) 
 
 def filled_board(node_arr):
     return all(all((col < 0) for col in row) for row in node_arr)
@@ -73,6 +73,3 @@ Converts metadata to 2 grids
 """
 def to_grid():
     return
-
-def move_to(cur_loc, dir):
-    return (cur_loc[0] + dir[0], cur_loc[1] + dir[1])
