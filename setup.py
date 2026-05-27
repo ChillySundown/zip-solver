@@ -41,7 +41,7 @@ Ex:
 board: A 2-dimensional list of numbers symbolizing different spots
     - 0 -> Spot is empty
     - 1, 2, 3...n -> Spot is path node
-    - float('inf') -> Spot is taken by current path
+    - -1 -> Spot is taken by current path
 
 barriers: A 2-dimensional list of integers symbolizing the type of 
 head: A list of directions starting from the first node
@@ -59,8 +59,12 @@ A solved game should satisfy:
     - No barries should be crossed
 
 """
-def check_solved(board):
-    return
+def check_solved(node_board):
+    for row in node_board:
+        for col in row:
+            if col != -1:
+                return False
+    return True
 
 """
 Converts metadata to 2 grids
