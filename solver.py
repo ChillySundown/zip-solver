@@ -14,7 +14,9 @@ def dfs(node_arr, border_arr, path, cur_int, last_loc):
         return path
 
     start_x, start_y = last_loc
-    opposite_dir = (path[-1] << 1) if path[-1] & 0b0101 else (path[-1] >> 1) #Might not need this because we already mark occupied nodes
+    opposite_dir = None
+    if path:    
+        opposite_dir = (path[-1] << 1) if path[-1] & 0b0101 else (path[-1] >> 1) #Might not need this because we already mark occupied nodes
     board_len = len(node_arr)
 
 
