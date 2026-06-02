@@ -7,6 +7,13 @@
 
 I created this Zip Solver as a challenge. When a friend of mine beat my Zip record by one second, I promised myself I would never fall behind again. 
 
+**DFS + Backtracking - The Workhorse**
+    - Every position in a puzzle's `borders_arr` is a 4-bit integer that describes which next moves are possible.
+    - The possible moves are stored in a list obtained by bitmasking the node's borders with each direction
+    - We calculate the next location for each move and only apply DFS if the next node is empty (0) or our current highest node + 1
+
+
+
 **UNDER CONSTRUCTION -- STAY TUNED**
 
 **Chrome Web Store Release: TBD**

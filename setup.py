@@ -68,7 +68,7 @@ def check_solved(node_board):
 
 """
 Converts metadata to 2 grids
-    -Edges: 2D-Array of 4-bit values symbolizing barriers at each node
+    -borders: 2D-Array of 4-bit values symbolizing barriers at each node
     -Nums: 2D-Array of 8-bit values that symbolize a node's number and fill status:
         - 0: Node has not been filled and has no number assigned
         - -1: Node has been filled by path
