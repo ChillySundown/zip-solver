@@ -1,0 +1,11 @@
+{
+    "name": "zip_solver",
+    "version": "1.0.0",
+    "description": "LinkedIn Zip Solver Chrome Extension",
+    "scripts": {
+      "test": "jest"
+    },
+    "devDependencies": {
+      "jest": "^30.4.2"
+    }
+}

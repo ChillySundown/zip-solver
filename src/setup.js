@@ -17,8 +17,19 @@ Determines if any pair of row and col coordinates are out of bounds
 */
 
 export function out_of_bounds(coords, board_len) {
-    function oob(coord, len) {
-        return coord < 0 || coord >= len
+    return coords.some(loc => pos < 0 || pos >= board_len)
+}
+
+/*
+Determines if 2D-array game board has been filled
+*/
+export function filled_board(node_arr) {
+    const filled_loc = (loc) => loc < 0
+
+    for (const row of node_arr) {
+        if(!row.every(filled_loc)) {
+            return false
+        }
     }
-    return coords.some(oob)
+    return true
 }
