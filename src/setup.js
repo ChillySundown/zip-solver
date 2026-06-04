@@ -17,7 +17,7 @@ Determines if any pair of row and col coordinates are out of bounds
 */
 
 export function out_of_bounds(coords, board_len) {
-    return coords.some(loc => pos < 0 || pos >= board_len)
+    return coords.some(pos => pos < 0 || pos >= board_len)
 }
 
 /*
