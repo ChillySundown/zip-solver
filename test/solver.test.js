@@ -1,0 +1,1 @@
+const solver = require('../src/solver.js')
