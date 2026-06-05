@@ -1,4 +1,4 @@
-import {directions, out_of_bounds, filled_board} from "./setup"
+import {directions, out_of_bounds, filled_board} from "./setup.js"
 
 /*
 Depth-First Search Algorithm for traversing graph
@@ -32,5 +32,38 @@ function dfs(node_arr, border_arr, path, cur_int, last_loc) {
     let border_type = border_arr[start_r][start_c];
 
     //Implement possible directions list -- NOT A COMPREHENSION
+    let possible_directions = [];
+    for(let dir of directions.keys()) {
+        if(dir & border_type && dir != opposite_dir) {
+            possible_directions.push(dir)
+        }
+    }
 
+    for(dir in possible_direction) {
+        let next_loc = [start_r + directions[dir][0], start_c + directions[dir][1]];
+        if(!out_of_bounds(next_loc, board_len)) {
+            let loc_val = node_arr[next_loc[0]][next_loc[1]];
+            let prev_cur = cur_int //Stores current highest int
+
+            if((loc_val == 0 || loc_val == cur_int+1)) {
+                path.push(dir);
+                node_arr[next_loc[0]][next_loc[1]] = -1; //Sets node to occupied
+                
+                if(loc_val > 0) {
+                    cur_int++;
+                }
+
+                let result = dfs(node_arr, border_arr, path, cur_int, next_loc);
+                if(result) {
+                    return result;
+                }
+
+                path.pop(); 
+                node_arr[next_loc[0]][next_loc[1]] = loc_val; //Restoring value after backtracking attempts
+                cur_int = prev_cur;
+            }
+        }
+        continue;
+    }
+    return null;
 }
