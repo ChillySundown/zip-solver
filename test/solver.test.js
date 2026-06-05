@@ -1,1 +1,3 @@
-const solver = require('../src/solver.js')
+import {solver} from '../src/solver.js'
+
+

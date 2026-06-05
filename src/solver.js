@@ -67,3 +67,4 @@ function dfs(node_arr, border_arr, path, cur_int, last_loc) {
     }
     return null;
 }
+module.exports = getFullName
