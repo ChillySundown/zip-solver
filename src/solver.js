@@ -15,8 +15,8 @@ OPPOSITES[2] = 1
 OPPOSITES[4] = 8
 OPPOSITES[8] = 4
 
-function dfs(node_arr, border_arr, path, cur_int, last_loc) {
-    if(!filled_board(node_arr)) { //Checks if current path satisfies board
+export function dfs(node_arr, border_arr, path, cur_int, last_loc) {
+    if(filled_board(node_arr)) { //Checks if current path satisfies board
         return path;
     }
 
@@ -39,7 +39,7 @@ function dfs(node_arr, border_arr, path, cur_int, last_loc) {
         }
     }
 
-    for(dir in possible_direction) {
+    for(dir in possible_directions) {
         let next_loc = [start_r + directions[dir][0], start_c + directions[dir][1]];
         if(!out_of_bounds(next_loc, board_len)) {
             let loc_val = node_arr[next_loc[0]][next_loc[1]];
@@ -54,7 +54,7 @@ function dfs(node_arr, border_arr, path, cur_int, last_loc) {
                 }
 
                 let result = dfs(node_arr, border_arr, path, cur_int, next_loc);
-                if(result) {
+                if(Array.isArray(path) && path.length > 0) {
                     return result;
                 }
 
@@ -67,4 +67,4 @@ function dfs(node_arr, border_arr, path, cur_int, last_loc) {
     }
     return null;
 }
-module.exports = getFullName
+//module.exports = dfs
