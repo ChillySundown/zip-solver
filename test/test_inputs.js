@@ -80,12 +80,14 @@ export const test2_borders = [
     [0b1111, 0b0111, 0b0111, 0b0111, 0b0111, 0b1111],
 ]
 
+export const test2_start_loc = [2, 5]
+
 export const test2_path = [
     ...Array(2).fill(2),     //Left 2
-    ...Array(8),            //Up
-    ...Array(1).fill(2),    // Right 2
-    ...Array(8),            // Up
-    ...Array(2).fill(5),    // Left 5
+    ...Array(1).fill(8),     //Up
+    ...Array(2).fill(1),    // Right 2
+    ...Array(1).fill(8),    // Up
+    ...Array(5).fill(2),    // Left 5
     ...Array(2).fill(4),  // Down 2
     ...Array(1).fill(1),  // Right
     ...Array(1).fill(8),  // Up
@@ -112,6 +114,8 @@ export const test3_nodes = [
     [0, 0, 4,  0,  0, 5, 0, 0],
     [0, 0, 0,  1, 16, 0, 0, 0],
 ];
+
+export const test3_start_loc = [7,3]
 
 export const test3_borders = [
     [0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111],

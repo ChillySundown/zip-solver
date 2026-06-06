@@ -9,23 +9,22 @@ Depth-First Search Algorithm for traversing graph
     - last_loc: Last location accessed
 */
 
-const OPPOSITES = new Object();
-OPPOSITES[1] = 2
-OPPOSITES[2] = 1
-OPPOSITES[4] = 8
-OPPOSITES[8] = 4
+const OPPOSITES = {};
+OPPOSITES[1] = 2;
+OPPOSITES[2] = 1;
+OPPOSITES[4] = 8;
+OPPOSITES[8] = 4;
 
 export function dfs(node_arr, border_arr, path, cur_int, last_loc) {
     if(filled_board(node_arr)) { //Checks if current path satisfies board
         return path;
     }
 
-    var start_r, start_c
-    [start_r, start_c] = last_loc
-    let opposit_dir = null
+    let [start_r, start_c] = last_loc
+    let opposite_dir = null
 
-    if(path.length == 0) {
-        opposite_dir = OPPOSITES[path.at(-1)]
+    if(path.length != 0) {
+        opposite_dir = OPPOSITES[path.at(-1)];
     }
 
     let board_len = node_arr.length;
@@ -39,27 +38,27 @@ export function dfs(node_arr, border_arr, path, cur_int, last_loc) {
         }
     }
 
-    for(dir in possible_directions) {
-        let next_loc = [start_r + directions[dir][0], start_c + directions[dir][1]];
-        if(!out_of_bounds(next_loc, board_len)) {
-            let loc_val = node_arr[next_loc[0]][next_loc[1]];
+    for(const dir of possible_directions) {
+        let [next_r, next_c] = [start_r + directions.get(dir)[0], start_c + directions.get(dir)[1]];
+        if(!out_of_bounds([next_r, next_c], board_len)) {
+            let loc_val = node_arr[next_r][next_c];
             let prev_cur = cur_int //Stores current highest int
 
             if((loc_val == 0 || loc_val == cur_int+1)) {
                 path.push(dir);
-                node_arr[next_loc[0]][next_loc[1]] = -1; //Sets node to occupied
+                node_arr[next_r][next_c] = -1; //Sets node to occupied
                 
                 if(loc_val > 0) {
                     cur_int++;
                 }
 
-                let result = dfs(node_arr, border_arr, path, cur_int, next_loc);
-                if(Array.isArray(path) && path.length > 0) {
+                let result = dfs(node_arr, border_arr, path, cur_int, [next_r, next_c]);
+                if(result) {
                     return result;
                 }
 
                 path.pop(); 
-                node_arr[next_loc[0]][next_loc[1]] = loc_val; //Restoring value after backtracking attempts
+                node_arr[next_r][next_c] = loc_val; //Restoring value after backtracking attempts
                 cur_int = prev_cur;
             }
         }
