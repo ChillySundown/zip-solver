@@ -3,6 +3,7 @@ function make_empty_grid(size) {
 }
 
 const cells = document.querySelectorAll('[data-cell-idx]')
+console.log(cells[8])
 let size = null
 switch(cells.length) {
     case 36:
@@ -28,7 +29,16 @@ cells.forEach(cell => {
     let index = parseInt(cell.getAttribute('data-cell-idx'))
     let r = Math.floor(index / size) 
     let c = index % size
+
+    const has_number = cell.querySelector('[data-cell-content="true"]')
+    if(has_number) {
+        const num = parseInt(has_number.getAttribute('aria-label'))
+        console.log("NUMBER FOUND", num)
+
+        node_arr[r][c] = num;
+    }
     console.log(r)
     console.log(c)
-
 })
+
+console.log(node_arr)
