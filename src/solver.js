@@ -1,4 +1,4 @@
-import {directions, out_of_bounds, filled_board} from "./setup.js"
+import {directions, OPPOSITES, out_of_bounds, filled_board} from "./setup.js"
 
 /*
 Depth-First Search Algorithm for traversing graph
@@ -9,11 +9,6 @@ Depth-First Search Algorithm for traversing graph
     - last_loc: Last location accessed
 */
 
-const OPPOSITES = {};
-OPPOSITES[1] = 2;
-OPPOSITES[2] = 1;
-OPPOSITES[4] = 8;
-OPPOSITES[8] = 4;
 
 export function dfs(node_arr, border_arr, path, cur_int, last_loc) {
     if(filled_board(node_arr)) { //Checks if current path satisfies board

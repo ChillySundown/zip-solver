@@ -12,6 +12,16 @@ directions.set(1, [0, 1])
 directions.set(2, [0, -1])
 directions.set(4, [1, 0])
 directions.set(8, [-1, 0])
+
+/*
+Dictionary that maps each direction to it's opposite
+*/
+export const OPPOSITES = {};
+OPPOSITES[0b0001] = 0b0010;
+OPPOSITES[0b0010] = 0b0001;
+OPPOSITES[0b0100] = 0b1000;
+OPPOSITES[0b1000] = 0b0100;
+
 /*
 Determines if any pair of row and col coordinates are out of bounds
 */
