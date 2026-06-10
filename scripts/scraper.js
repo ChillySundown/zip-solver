@@ -1,8 +1,9 @@
-function make_empty_grid(size) {
-    return Array(size).fill().map(() => Array(size).fill(0))
+function make_empty_grid(size, val = 0) {
+    return Array(size).fill().map(() => Array(size).fill(val))
 }
 
 const bar_types = ['border-right', 'border-left', 'border-bottom', 'border-top'];
+const OPPOSITES = {0:1, 1:0, 2:3, 3:2};
 
 const cells = document.querySelectorAll('[data-cell-idx]')
 console.log(cells[8])
@@ -23,7 +24,7 @@ switch(cells.length) {
 }
 console.log(size)
 const node_arr = make_empty_grid(size)
-const border_arr = make_empty_grid(size)
+const border_arr = make_empty_grid(size, 0b1111)
 console.log(node_arr)
 console.log(border_arr)
 
@@ -35,27 +36,39 @@ cells.forEach(cell => {
     const has_number = cell.querySelector('[data-cell-content="true"]')
 
     //Check if there is a barrier at node
-    const bar_div = cell.lastElementChild
-    const node_style = window.getComputedStyle(bar_div, '::after'); 
+    const childDivs = cell.querySelectorAll(':scope > div');
 
-    if(node_style) {
-        for(let i = 0; i < 4; i++) {
-            let bar_thick = parseInt(node_style.getPropertyValue(bar_types[i]));
-            console.log(bar_thick)
-            let bar_dir = 1 << i;
-            if(!bar_thick) { //If there is no barrier in that direction
-                border_arr[r][c] |= bar_dir;
+    childDivs.forEach(barDiv => {
+        const divStyle = window.getComputedStyle(barDiv, '::after'); 
+
+        if(!divStyle) {
+            return
+        }
+        else {
+            for(let i = 0; i < 4; i++) {
+                let bar_thick = parseInt(divStyle.getPropertyValue(bar_types[i]));
+                console.log(divStyle.getPropertyValue(bar_types[i]))
+                //console.log(bar_thick)
+                if(bar_thick) { //If there is no barrier in that direction
+                    border_arr[r][c] &= ~(1 << i);
+
+                    //After setting the barrier, performs a handshake with the adjacent barrier
+                    if(bar_types[i] == 'border-right' && c+1 < size) {border_arr[r][c+1] &= ~(1 << OPPOSITES[i])}
+                    else if(bar_types[i] == 'border-left' && c-1 >= 0) {border_arr[r][c-1] &= ~(1 << OPPOSITES[i])}
+                    else if(bar_types[i] == 'border-down' && r-1 >= 0) {border_arr[r-1][c] &= ~(1 << OPPOSTIES[i])}
+                    else if(bar_types[i] == 'border-up' && r+1 < size) {border_arr[r+1][c] &= ~(1 << OPPOSITES[i])}
+                }
             }
         }
-    }
+    });
     
     if(has_number) {
         const num = parseInt(has_number.getAttribute('aria-label'))
         //console.log("NUMBER FOUND", num)
-
         node_arr[r][c] = num;
     }
 
 })
 
 console.log(node_arr)
+console.log(border_arr.map((row) => row.map((col) => col.toString(2))));
