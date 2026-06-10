@@ -2,6 +2,7 @@ function make_empty_grid(size, val = 0) {
     return Array(size).fill().map(() => Array(size).fill(val))
 }
 
+//Keys to search CSSStyles object of a given node to see if there is a barrier printed
 const bar_types = ['border-right', 'border-left', 'border-bottom', 'border-top'];
 const OPPOSITES = {0:1, 1:0, 2:3, 3:2};
 
@@ -41,6 +42,7 @@ cells.forEach(cell => {
     childDivs.forEach(barDiv => {
         const divStyle = window.getComputedStyle(barDiv, '::after'); 
 
+        //If there is no barrier detected, skips div
         if(!divStyle) {
             return
         }
@@ -49,7 +51,7 @@ cells.forEach(cell => {
                 let bar_thick = parseInt(divStyle.getPropertyValue(bar_types[i]));
                 console.log(divStyle.getPropertyValue(bar_types[i]))
                 //console.log(bar_thick)
-                if(bar_thick) { //If there is no barrier in that direction
+                if(bar_thick) { //If there is a barried detected, set direction to 0
                     border_arr[r][c] &= ~(1 << i);
 
                     //After setting the barrier, performs a handshake with the adjacent barrier
