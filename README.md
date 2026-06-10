@@ -14,7 +14,9 @@ I created this Zip Solver as a challenge. When a friend of mine beat my Zip reco
 
 **DOM Manipulation - The Connection**
     - Querys the document for a collection of divs that represent the game board cells.
-
+    
+    - Checks if each cell has a number-field via the QuerySelector function for the node_arr, otherwise keeps the node to 0
+    
 
 **UNDER CONSTRUCTION -- STAY TUNED**
 

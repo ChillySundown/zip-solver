@@ -22,6 +22,8 @@ OPPOSITES[0b0010] = 0b0001;
 OPPOSITES[0b0100] = 0b1000;
 OPPOSITES[0b1000] = 0b0100;
 
+//I made an edit! Hooray
+
 /*
 Determines if any pair of row and col coordinates are out of bounds
 */
