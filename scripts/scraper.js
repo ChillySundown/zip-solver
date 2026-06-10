@@ -59,8 +59,3 @@ cells.forEach(cell => {
 })
 
 console.log(node_arr)
-for(let r = 0; r < 6; r++) {
-    for(let c = 0; c < 6; c++) {
-        console.log(r, c, border_arr[r][c].toString(2))
-    }
-}
