@@ -57,8 +57,8 @@ cells.forEach(cell => {
                     //After setting the barrier, performs a handshake with the adjacent barrier
                     if(bar_types[i] == 'border-right' && c+1 < size) {border_arr[r][c+1] &= ~(1 << OPPOSITES[i])}
                     else if(bar_types[i] == 'border-left' && c-1 >= 0) {border_arr[r][c-1] &= ~(1 << OPPOSITES[i])}
-                    else if(bar_types[i] == 'border-down' && r-1 >= 0) {border_arr[r-1][c] &= ~(1 << OPPOSTIES[i])}
-                    else if(bar_types[i] == 'border-up' && r+1 < size) {border_arr[r+1][c] &= ~(1 << OPPOSITES[i])}
+                    else if(bar_types[i] == 'border-bottom' && r+1 < size) {border_arr[r+1][c] &= ~(1 << OPPOSITES[i])}
+                    else if(bar_types[i] == 'border-top' && r-1 >= 0) {border_arr[r-1][c] &= ~(1 << OPPOSITES[i])}
                 }
             }
         }
