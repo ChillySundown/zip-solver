@@ -7,8 +7,8 @@ const bar_types = ['border-right', 'border-left', 'border-bottom', 'border-top']
 const OPPOSITES = {0:1, 1:0, 2:3, 3:2};
 
 const cells = document.querySelectorAll('[data-cell-idx]')
-console.log(cells[8])
 let size = null
+
 switch(cells.length) {
     case 36:
         size = 6
@@ -23,11 +23,9 @@ switch(cells.length) {
         console.log("Error - Unforseen grid length error")
         size = 0
 }
-console.log(size)
+
 const node_arr = make_empty_grid(size)
 const border_arr = make_empty_grid(size, 0b1111)
-console.log(node_arr)
-console.log(border_arr)
 
 cells.forEach(cell => {
     let index = parseInt(cell.getAttribute('data-cell-idx'))
