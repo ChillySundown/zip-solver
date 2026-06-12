@@ -1,3 +1,5 @@
+import dfs from "../src/solver.js"
+
 function make_empty_grid(size, val = 0) {
     return Array(size).fill().map(() => Array(size).fill(val))
 }
@@ -8,6 +10,8 @@ const OPPOSITES = {0:1, 1:0, 2:3, 3:2};
 
 const cells = document.querySelectorAll('[data-cell-idx]')
 let size = null
+
+let start_loc = [0,0];
 
 switch(cells.length) {
     case 36:
@@ -65,10 +69,18 @@ cells.forEach(cell => {
     if(has_number) {
         const num = parseInt(has_number.getAttribute('aria-label'))
         //console.log("NUMBER FOUND", num)
+        if(num == 1) {
+            start_loc = [r, c];
+        }
         node_arr[r][c] = num;
     }
 
-})
+});
 
 console.log(node_arr)
 console.log(border_arr.map((row) => row.map((col) => col.toString(2))));
+
+let [start_r, start_c] = start_loc; //Starting value
+
+node_arr[start_r][start_c] = -1; // Set the start location to 1
+let filled_path = dfs(node_arr, border_arr, list(), 1, start_loc);
