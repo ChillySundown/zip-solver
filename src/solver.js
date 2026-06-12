@@ -10,7 +10,7 @@ Depth-First Search Algorithm for traversing graph
 */
 
 
-export function dfs(node_arr, border_arr, path, cur_int, last_loc) {
+export default function dfs(node_arr, border_arr, path, cur_int, last_loc) {
     if(filled_board(node_arr)) { //Checks if current path satisfies board
         return path;
     }
