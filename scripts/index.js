@@ -34,9 +34,9 @@ const keyStrokes = {
 //Keys to search CSSStyles object of a given node to see if there is a barrier printed
 const bar_types = ['border-right', 'border-left', 'border-bottom', 'border-top'];
 const OPPOSITES = {0:1, 1:0, 2:3, 3:2};
-let start_loc = [0,0];
 
 function zipSolver(cells) {
+    let start_loc = [0,0];
     let size;
     switch(cells.length) {
         case 36:
@@ -77,7 +77,7 @@ function zipSolver(cells) {
             else {
                 for(let i = 0; i < 4; i++) {
                     let bar_thick = parseInt(divStyle.getPropertyValue(bar_types[i]));
-                    console.log(divStyle.getPropertyValue(bar_types[i]))
+                    //console.log(divStyle.getPropertyValue(bar_types[i]))
                     //console.log(bar_thick)
                     if(bar_thick) { //If there is a barried detected, set direction to 0
                         border_arr[r][c] &= ~(1 << i);
@@ -113,7 +113,8 @@ function zipSolver(cells) {
 
     //Simulate Keyboard Presses with KeyboardEvent API
     for(let move of filled_path) {
-        document.dispatchEvent(keyStrokes[move]);
+        //console.log(keyStrokes[move])
+        document.activeElement.dispatchEvent(keyStrokes[move]);
     }
 }
 

@@ -94,8 +94,8 @@
   };
   var bar_types = ["border-right", "border-left", "border-bottom", "border-top"];
   var OPPOSITES2 = { 0: 1, 1: 0, 2: 3, 3: 2 };
-  var start_loc = [0, 0];
   function zipSolver(cells) {
+    let start_loc = [0, 0];
     let size;
     switch (cells.length) {
       case 36:
@@ -127,7 +127,6 @@
         } else {
           for (let i = 0; i < 4; i++) {
             let bar_thick = parseInt(divStyle.getPropertyValue(bar_types[i]));
-            console.log(divStyle.getPropertyValue(bar_types[i]));
             if (bar_thick) {
               border_arr[r][c] &= ~(1 << i);
               if (bar_types[i] == "border-right" && c + 1 < size) {
@@ -157,7 +156,7 @@
     node_arr[startRow][startCol] = -1;
     let filled_path = dfs(node_arr, border_arr, [], 1, start_loc);
     for (let move of filled_path) {
-      document.dispatchEvent(keyStrokes[move]);
+      document.activeElement.dispatchEvent(keyStrokes[move]);
     }
   }
   var observer = new MutationObserver(() => {
