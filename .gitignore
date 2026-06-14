@@ -1,3 +1,2 @@
-__pycache__/
-.pytest_cahce/
 node_modules/
+dist/
