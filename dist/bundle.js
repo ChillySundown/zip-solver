@@ -87,14 +87,18 @@
     bubbles: true
   });
   var keyStrokes = {
-    1: right,
-    2: left,
-    4: down,
-    8: up
+    1: "ArrowRight",
+    //right,
+    2: "ArrowLeft",
+    //left,
+    4: "ArrowDown",
+    //down,
+    8: "ArrowUp"
+    //up
   };
   var bar_types = ["border-right", "border-left", "border-bottom", "border-top"];
   var OPPOSITES2 = { 0: 1, 1: 0, 2: 3, 3: 2 };
-  function zipSolver(cells) {
+  async function zipSolver(cells) {
     let start_loc = [0, 0];
     let size;
     switch (cells.length) {
@@ -106,7 +110,6 @@
         break;
       case 64:
         size = 8;
-        console.log("Some random junk");
         break;
       default:
         console.log("Error - Unforseen grid length error");
@@ -156,7 +159,12 @@
     node_arr[startRow][startCol] = -1;
     let filled_path = dfs(node_arr, border_arr, [], 1, start_loc);
     for (let move of filled_path) {
-      document.activeElement.dispatchEvent(keyStrokes[move]);
+      let keyMove = chrome.debugger.sendCommand(tab, "Input.dispatchKeyEvent", {
+        type: "keydown",
+        key: keyStrokes[move]
+      });
+      console.log(keyMove);
+      await keyMove;
     }
   }
   var observer = new MutationObserver(() => {

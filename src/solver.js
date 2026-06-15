@@ -1,4 +1,4 @@
-import {directions, OPPOSITES, out_of_bounds, filled_board} from "./setup.js"
+import * as utils from "./utils.js"
 
 /*
 Depth-First Search Algorithm for traversing graph
@@ -34,8 +34,8 @@ export default function dfs(node_arr, border_arr, path, cur_int, last_loc) {
     }
 
     for(const dir of possible_directions) {
-        let [next_r, next_c] = [start_r + directions.get(dir)[0], start_c + directions.get(dir)[1]];
-        if(!out_of_bounds([next_r, next_c], board_len)) {
+        let [next_r, next_c] = [start_r + utils.directions.get(dir)[0], start_c + utils.directions.get(dir)[1]];
+        if(!utils.out_of_bounds([next_r, next_c], board_len)) {
             let loc_val = node_arr[next_r][next_c];
             let prev_cur = cur_int //Stores current highest int
 

@@ -9,5 +9,8 @@
         "js": ["dist/bundle.js"],
         "type": "module"
         }
+    ],
+    "permissions": [
+        "debugger"
     ]
 }

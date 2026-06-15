@@ -45,3 +45,34 @@ export function filled_board(node_arr) {
     }
     return true
 }
+
+export function make_empty_grid(size, val = 0) {
+    return Array(size).fill().map(() => Array(size).fill(val))
+}
+
+export const right = new KeyboardEvent('keydown', {
+    key: 'ArrowRight',
+    bubbles: true
+});
+
+export const left = new KeyboardEvent('keydown', {
+    key: 'ArrowLeft',
+    bubbles: true
+});
+
+export const down = new KeyboardEvent('keydown', {
+    key: 'ArrowDown',
+    bubbles: true
+});
+
+export const up = new KeyboardEvent('keydown', {
+    key: 'ArrowUp',
+    bubbles: true
+});
+
+export const keyStrokes = {
+    0b0001: 'ArrowRight', //right,
+    0b0010: 'ArrowLeft',//left,
+    0b0100: 'ArrowDown', //down,
+    0b1000: 'ArrowUp'//up
+};
