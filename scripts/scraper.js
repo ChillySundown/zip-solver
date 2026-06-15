@@ -5,7 +5,7 @@ import * as utils from "../src/utils.js"
 const bar_types = ['border-right', 'border-left', 'border-bottom', 'border-top'];
 const OPPOSITES = {0:1, 1:0, 2:3, 3:2};
 
-export default function findPath(cells) {
+export default function solvePath(cells) {
     let start_loc = [0,0];
     let size;
     switch(cells.length) {
@@ -81,9 +81,23 @@ export default function findPath(cells) {
     const filledPath = dfs(node_arr, border_arr, [], 1, start_loc);
 
     if(filledPath) {
-        return filledPath
+        return filledPath//Sends a message to the backgroud
     } else {
         return Error("No Valid Path Found");
     }
 }
 
+const observer = new MutationObserver(() => {
+    const cells = document.querySelectorAll("[data-cell-idx]");
+    if(cells.length > 0) {
+        observer.disconnect();
+        console.log("parsed zip puzzle");
+        try {
+            const solvedPath = solvePath(cells);
+            chrome.runtime.sendMessage({solvedPath});
+        } catch(error) {
+            console.error(error)
+        }
+    }
+});
+observer.observe(document.body, {childList: true, subtree: true});

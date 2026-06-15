@@ -5,8 +5,8 @@
     "type": "module",
     "scripts": {
         "test": "node --experimental-vm-modules node_modules/.bin/jest",
-        "build": "esbuild scripts/index.js --bundle --outfile=dist/bundle.js",
-        "watch": "esbuild scripts/index.js --bundle --outfile=dist/bundle.js --watch"
+        "build": "esbuild scripts/scraper.js scripts/background.js --bundle --outfile=dist",
+        "watch": "esbuild scripts/scraper.js scripts/background.js --bundle --outfile=dist --watch"
     },
     "devDependencies": {
         "esbuild": "^0.28.1",

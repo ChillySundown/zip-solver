@@ -11,6 +11,9 @@
         }
     ],
     "permissions": [
-        "debugger"
+        "debugger",
+        "tabs",
+        "activeTab",
+        "scripting"
     ]
 }
