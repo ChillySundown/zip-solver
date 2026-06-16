@@ -11,7 +11,7 @@ Depth-First Search Algorithm for traversing graph
 
 
 export default function dfs(node_arr, border_arr, path, cur_int, last_loc) {
-    if(filled_board(node_arr)) { //Checks if current path satisfies board
+    if(utils.filled_board(node_arr)) { //Checks if current path satisfies board
         return path;
     }
 
@@ -19,7 +19,7 @@ export default function dfs(node_arr, border_arr, path, cur_int, last_loc) {
     let opposite_dir = null
 
     if(path.length != 0) {
-        opposite_dir = OPPOSITES[path.at(-1)];
+        opposite_dir = utils.OPPOSITES[path.at(-1)];
     }
 
     let board_len = node_arr.length;
@@ -27,7 +27,7 @@ export default function dfs(node_arr, border_arr, path, cur_int, last_loc) {
 
     //Implement possible directions list -- NOT A COMPREHENSION
     let possible_directions = [];
-    for(let dir of directions.keys()) {
+    for(let dir of utils.directions.keys()) {
         if(dir & border_type && dir != opposite_dir) {
             possible_directions.push(dir)
         }

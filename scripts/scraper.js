@@ -79,7 +79,6 @@ export default function solvePath(cells) {
 
     node_arr[startRow][startCol] = -1; // Set the start location to 1
     const filledPath = dfs(node_arr, border_arr, [], 1, start_loc);
-
     if(filledPath) {
         return filledPath//Sends a message to the backgroud
     } else {
@@ -94,7 +93,9 @@ const observer = new MutationObserver(() => {
         console.log("parsed zip puzzle");
         try {
             const solvedPath = solvePath(cells);
+            console.log(solvedPath)
             chrome.runtime.sendMessage({solvedPath});
+            console.log("message sent!!")
         } catch(error) {
             console.error(error)
         }
