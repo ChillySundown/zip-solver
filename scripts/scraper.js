@@ -86,6 +86,7 @@ export default function solvePath(cells) {
     }
 }
 
+//Observer that triggers when the grid is set up on the webpage
 const observer = new MutationObserver(() => {
     const cells = document.querySelectorAll("[data-cell-idx]");
     if(cells.length > 0) {
@@ -93,7 +94,7 @@ const observer = new MutationObserver(() => {
         console.log("parsed zip puzzle");
         try {
             const solvedPath = solvePath(cells);
-            console.log(solvedPath)
+            //console.log("Is it array,", Array.isArray(solvedPath))
             chrome.runtime.sendMessage({solvedPath});
             console.log("message sent!!")
         } catch(error) {

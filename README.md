@@ -18,6 +18,8 @@ I created this Zip Solver as a challenge. When a friend of mine beat my Zip reco
     - Checks if each cell has a number-field via the QuerySelector function for the node_arr, otherwise keeps the node to 0
     
 
+**Chrome API -- Pulling the Wool over LinkedIn's Eyes**
+
 **UNDER CONSTRUCTION -- STAY TUNED**
 
 **Chrome Web Store Release: TBD**
