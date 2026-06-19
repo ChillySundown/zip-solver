@@ -19,7 +19,7 @@ I created this Zip Solver as a challenge. When a friend of mine beat my Zip reco
     
 
 **Chrome API -- Pulling the Wool over LinkedIn's Eyes**
-
+ - Simulates keypresses with Chrome.debugger API based on the path given to us by the solver
 **UNDER CONSTRUCTION -- STAY TUNED**
 
 **Chrome Web Store Release: TBD**

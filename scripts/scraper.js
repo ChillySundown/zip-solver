@@ -1,11 +1,18 @@
 import dfs from "../src/solver.js"
 import * as utils from "../src/utils.js"
 
+(function() {
+//Prevents script from being injected twice
+if(window.__injectedScript) {
+    return;
+}
+window.__injectedScript = true;
+
 //Keys to search CSSStyles object of a given node to see if there is a barrier printed
 const bar_types = ['border-right', 'border-left', 'border-bottom', 'border-top'];
 const OPPOSITES = {0:1, 1:0, 2:3, 3:2};
 
-export default function solvePath(cells) {
+function solvePath(cells) {
     let start_loc = [0,0];
     let size;
     switch(cells.length) {
@@ -86,8 +93,7 @@ export default function solvePath(cells) {
     }
 }
 
-//Observer that triggers when the grid is set up on the webpage
-const observer = new MutationObserver(() => {
+function parseAndSolve() {
     const cells = document.querySelectorAll("[data-cell-idx]");
     if(cells.length > 0) {
         observer.disconnect();
@@ -97,9 +103,21 @@ const observer = new MutationObserver(() => {
             //console.log("Is it array,", Array.isArray(solvedPath))
             chrome.runtime.sendMessage({solvedPath});
             console.log("message sent!!")
+            return true;
         } catch(error) {
             console.error(error)
         }
+        return false;
     }
+}
+
+//Observer that triggers when the grid is set up on the webpage
+const observer = new MutationObserver(() => {
+    parseAndSolve();
 });
-observer.observe(document.body, {childList: true, subtree: true});
+
+if(!parseAndSolve()) { //Tries to solve puzzle, and observes for chanegs if not.
+    observer.observe(document.body, {childList: true, subtree: true});
+}
+
+})(); //End of IIFE function
