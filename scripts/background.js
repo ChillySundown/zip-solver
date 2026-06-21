@@ -2,6 +2,7 @@ import * as utils from "../src/utils.js"
 
 //Only injects script when Zip Site is loading
 chrome.tabs.onUpdated.addListener(((tabId, changeInfo, tab) => {
+    console.log(tab.url, changeInfo.status);
     const isZipPage = tab.url?.startsWith("https://www.linkedin.com/games/zip"); //Correct URL
     const isLoading = changeInfo.status === "loading"; 
 
@@ -12,7 +13,6 @@ chrome.tabs.onUpdated.addListener(((tabId, changeInfo, tab) => {
         }).catch(err => console.warn("Injection failed", err));
     }
 }));
-
 
 //Pick up message from content to simulate keyStrokes
 chrome.runtime.onMessage.addListener(async (path, sender) => {
@@ -27,7 +27,10 @@ chrome.runtime.onMessage.addListener(async (path, sender) => {
             type: "keyDown",
             key: utils.keyStrokes[move]
         });
-
+        await chrome.debugger.sendCommand({tabId: sender.tab.id}, "Input.dispatchKeyEvent", {
+            type: "keyUp",
+            key: utils.keyStrokes[move]
+        });
         //await sleep(30); //Pauses so LinkedIn thinks I'm a human
     }
 
