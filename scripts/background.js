@@ -2,15 +2,18 @@ import * as utils from "../src/utils.js"
 
 //Only injects script when Zip Site is loading
 chrome.tabs.onUpdated.addListener(((tabId, changeInfo, tab) => {
+    console.log("LETS FINISH THIS!!!")
     console.log(tab.url, changeInfo.status);
     const isZipPage = tab.url?.startsWith("https://www.linkedin.com/games/zip"); //Correct URL
     const isLoading = changeInfo.status === "loading"; 
 
     if(isZipPage && isLoading) {
+        console.log("Executing script in background.js...");
         chrome.scripting.executeScript({
             target: {tabId},
             files: ["dist/scraper.js"]
         }).catch(err => console.warn("Injection failed", err));
+        console.log("Script Executed!!!");
     }
 }));
 
