@@ -1,5 +1,10 @@
 **Linkedin Zip Solver Chrome Extension**
 
+![til][./ZipSolverGif.gif]
+
+__The Finished Product__
+
+
 - Chrome Extension that automatically solves LinkedIn's Zip puzzle
 - Powered by Backtracking DFS Algorithm 
 - Uses DOM Manipulation to parse puzzle into DFS input
