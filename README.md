@@ -1,6 +1,6 @@
 **Linkedin Zip Solver Chrome Extension**
 
-![til][./ZipSolverGif.gif]
+![til][ZipSolverGif.gif]
 
 __The Finished Product__
 
