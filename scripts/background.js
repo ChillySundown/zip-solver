@@ -17,6 +17,8 @@ chrome.tabs.onUpdated.addListener(((tabId, changeInfo, tab) => {
     }
 }));
 
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)); 
+
 //Pick up message from content to simulate keyStrokes
 chrome.runtime.onMessage.addListener(async (path, sender) => {
     console.log("Message recieved!")
@@ -25,6 +27,10 @@ chrome.runtime.onMessage.addListener(async (path, sender) => {
     await chrome.debugger.attach({tabId: sender.tab.id}, "1.3");
     console.log("attached chrome debugger")
 
+    console.log("Waiting a second...")
+    await sleep(1000);
+    //await sleep(1000)
+    console.log("Continuing solving path")
     for(let move of solvedPath) { //Sends a keystroke command for each move
         await chrome.debugger.sendCommand({tabId: sender.tab.id}, "Input.dispatchKeyEvent", {
             type: "keyDown",
