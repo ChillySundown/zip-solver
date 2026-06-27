@@ -12,7 +12,7 @@ window.__injectedScript = true;
 const bar_types = ['border-right', 'border-left', 'border-bottom', 'border-top'];
 const OPPOSITES = {0:1, 1:0, 2:3, 3:2};
 
-function solvePath(cells) {
+function parseGrid(cells) {
     let start_loc = [0,0];
     let size;
     switch(cells.length) {
@@ -76,12 +76,11 @@ function solvePath(cells) {
             }
             node_arr[r][c] = num;
         }
-
     });
+    return [node_arr, border_arr, start_loc];
+}
 
-    console.log(node_arr)
-    console.log(border_arr.map((row) => row.map((col) => col.toString(2))));
-
+function solvePath(start_loc, node_arr, border_arr) {
     let [startRow, startCol] = start_loc; //Starting value
 
     node_arr[startRow][startCol] = -1; // Set the start location to 1
@@ -99,7 +98,9 @@ function parseAndSolve() {
         observer.disconnect();
         console.log("parsed zip puzzle");
         try {
-            const solvedPath = solvePath(cells);
+            let [node_arr, border_arr, start_loc] = parseGrid(cells);
+            console.log(node_arr);
+            const solvedPath = solvePath(start_loc, node_arr, border_arr);
             //console.log("Is it array,", Array.isArray(solvedPath))
             chrome.runtime.sendMessage({solvedPath});
             console.log("message sent!!")
