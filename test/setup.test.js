@@ -1,4 +1,4 @@
-import {directions, out_of_bounds, filled_board} from "../src/setup.js"
+import {directions, out_of_bounds, filled_board} from "../src/utils.js"
 
 //OOB Tests
 //OOB = "Out of Bounds"

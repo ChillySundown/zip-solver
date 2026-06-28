@@ -27,20 +27,19 @@ chrome.runtime.onMessage.addListener(async (path, sender) => {
     await chrome.debugger.attach({tabId: sender.tab.id}, "1.3");
     console.log("attached chrome debugger")
 
-    console.log("Waiting a second...")
-    //await sleep(1000)
     // Solve first move to activate timer
-    // await chrome.debugger.sendCommand({tabId: sender.tab.id}, "Input.dispatchKeyEvent", {
-    //     type: "keyDown",
-    //     key: utils.keyStrokes[solvedPath[0]]
-    // });
-    // await chrome.debugger.sendCommand({tabId: sender.tab.id}, "Input.dispatchKeyEvent", {
-    //     type: "keyUp",
-    //     key: utils.keyStrokes[solvedPath[0]]
-    // });
-    // await sleep(2000);
+    await chrome.debugger.sendCommand({tabId: sender.tab.id}, "Input.dispatchKeyEvent", {
+        type: "keyDown",
+        key: utils.keyStrokes[solvedPath[0]]
+    });
+    await chrome.debugger.sendCommand({tabId: sender.tab.id}, "Input.dispatchKeyEvent", {
+        type: "keyUp",
+        key: utils.keyStrokes[solvedPath[0]]
+    });
+    console.log("Waiting two  second...")
+    await sleep(2000);
     console.log("Continuing solving path")
-    for(let move of solvedPath/*.slice(1)*/) { //Sends a keystroke command for each move
+    for(let move of solvedPath.slice(1)) { //Sends a keystroke command for each move
         await chrome.debugger.sendCommand({tabId: sender.tab.id}, "Input.dispatchKeyEvent", {
             type: "keyDown",
             key: utils.keyStrokes[move]
@@ -49,7 +48,7 @@ chrome.runtime.onMessage.addListener(async (path, sender) => {
             type: "keyUp",
             key: utils.keyStrokes[move]
         });
-        //await sleep(20); //Pauses so LinkedIn thinks I'm a human
+        //await sleep(40); //Pauses so LinkedIn thinks I'm a human
     }
 
     await chrome.debugger.detach({tabId: sender.tab.id})
