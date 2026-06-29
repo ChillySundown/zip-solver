@@ -39,7 +39,8 @@ chrome.runtime.onMessage.addListener(async (path, sender) => {
     console.log("Waiting two  second...")
     await sleep(2000);
     console.log("Continuing solving path")
-    for(let move of solvedPath.slice(1)) { //Sends a keystroke command for each move
+    let restOfPath = solvedPath.slice(1);
+    for(let move of restOfPath) { //Sends a keystroke command for each move
         await chrome.debugger.sendCommand({tabId: sender.tab.id}, "Input.dispatchKeyEvent", {
             type: "keyDown",
             key: utils.keyStrokes[move]
